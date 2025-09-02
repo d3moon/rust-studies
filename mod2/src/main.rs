@@ -243,41 +243,41 @@ fn main() {
     // let check: Option<&i32> = numbers.get(100);
     // println!("Get Element: {:?}", check); // Retorna o elemento do array na posição 100 na forma de um Option. Como não existe, retorna None.
 
-    /*
-     * Vetores são coleções de elementos de mesmo tipo, mas com tamanho dinâmico.
-     * Declarados com a macro `vec![]`.
-     * A tipagem envolve a utilização de `Vec<T>`, onde `T` é o tipo dos elementos.
-     */
-    let mut vetor: Vec<i32> = vec![1, 2, 3, 4];
-    vetor[1] = 10;
-    println!("Vetor: {}", vetor[1]);
+    // /*
+    //  * Vetores são coleções de elementos de mesmo tipo, mas com tamanho dinâmico.
+    //  * Declarados com a macro `vec![]`.
+    //  * A tipagem envolve a utilização de `Vec<T>`, onde `T` é o tipo dos elementos.
+    //  */
+    // let mut vetor: Vec<i32> = vec![1, 2, 3, 4];
+    // vetor[1] = 10;
+    // println!("Vetor: {}", vetor[1]);
 
-    // Inicializando um vetor com os mesmos valores
-    let vetor_2: Vec<i32> = vec![0; 10];
-    println!("Vetor 2: {:?}", vetor_2);
+    // // Inicializando um vetor com os mesmos valores
+    // let vetor_2: Vec<i32> = vec![0; 10];
+    // println!("Vetor 2: {:?}", vetor_2);
 
-    // Criando uma referência do indice 0 ao 1
-    let subset: &[i32] = &vetor[0..2];
-    println!("Subset: {:?}", subset);
+    // // Criando uma referência do indice 0 ao 1
+    // let subset: &[i32] = &vetor[0..2];
+    // println!("Subset: {:?}", subset);
 
-    // Pesquisando a existencia de um elemento de forma segura usando a referencia em vez de pegar ou copiar
-    let option: Option<&i32> = vetor.get(2);
-    println!("Get Element: {:?}", option);
+    // // Pesquisando a existencia de um elemento de forma segura usando a referencia em vez de pegar ou copiar
+    // let option: Option<&i32> = vetor.get(2);
+    // println!("Get Element: {:?}", option);
 
-    vetor.push(12); // Adiciona um elemento ao final do vetor
-    println!("Vetor: {:?}", vetor);
+    // vetor.push(12); // Adiciona um elemento ao final do vetor
+    // println!("Vetor: {:?}", vetor);
 
-    vetor.pop(); // Remove o último elemento do vetor
-    println!("Vetor: {:?}", vetor);
+    // vetor.pop(); // Remove o último elemento do vetor
+    // println!("Vetor: {:?}", vetor);
 
-    vetor.remove(1); // Remove o elemento na posição 1
-    println!("Remove Element from Index: {:?}", vetor);
+    // vetor.remove(1); // Remove o elemento na posição 1
+    // println!("Remove Element from Index: {:?}", vetor);
 
-    println!("Contains Element: {:?}", vetor.contains(&10)); // Preciso passar o & pq é uma medida do Rust para evitar cópias desnecessárias
+    // println!("Contains Element: {:?}", vetor.contains(&10)); // Preciso passar o & pq é uma medida do Rust para evitar cópias desnecessárias
 
-    /*
-     * Vec guarda os valores dentro dele. Se você passasse o valor direto, o Rust teria que mover o valor para dentro da função, ou copiar.
-     * Ao exigir &T, a função não precisa copiar ou mover nada, só compara a referência com os elementos do vetor.
-     * Isso funciona mesmo para tipos grandes, que não são Copy, sem gastar memória extra.
-     */
+    // /*
+    //  * Vec guarda os valores dentro dele. Se você passasse o valor direto, o Rust teria que mover o valor para dentro da função, ou copiar.
+    //  * Ao exigir &T, a função não precisa copiar ou mover nada, só compara a referência com os elementos do vetor.
+    //  * Isso funciona mesmo para tipos grandes, que não são Copy, sem gastar memória extra.
+    //  */
 }
