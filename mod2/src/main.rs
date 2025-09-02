@@ -122,46 +122,126 @@ fn main() {
      *  - String -> String mutável
      */
 
-    let some_string: &str = "Hello, world!"; // &str é uma fatia de string, uma string imutável
-    let mut another_string: String = String::from(" Hello, world! "); // String é uma string mutável
-    another_string.push_str(" How are you?"); // Adiciona uma string ao final da outra
+    // let some_string: &str = "Hello, world!"; // &str é uma fatia de string, uma string imutável
+    // let mut another_string: String = String::from(" Hello, world! "); // String é uma string mutável
+    // another_string.push_str(" How are you?"); // Adiciona uma string ao final da outra
 
-    another_string.push('!'); // Adiciona um caractere ao final da string
-    another_string.pop(); // Remove o último caractere da string
-    println!("{}", some_string);
-    println!("{}", another_string);
+    // another_string.push('!'); // Adiciona um caractere ao final da string
+    // another_string.pop(); // Remove o último caractere da string
+    // println!("{}", some_string);
+    // println!("{}", another_string);
 
-    // Algumas funcoes uteis de strings
+    // // Algumas funcoes uteis de strings
 
+    // println!(
+    //     "Basics function on Strings, is empty: {}",
+    //     another_string.is_empty()
+    // ); // Verifica se a string está vazia
+    // println!(
+    //     "Basics function on Strings, length: {}",
+    //     another_string.len()
+    // ); // Retorna o tamanho da string
+    // println!(
+    //     "Basics function on Strings, contains 'world': {}",
+    //     another_string.contains("world")
+    // ); // Verifica se a string contém uma substring
+    // println!(
+    //     "Basics function on Strings, bytes: {}",
+    //     another_string.capacity()
+    // ); // Retorna a quantidade de bytes alocados na memória
+
+    // println!("{}", another_string.trim()); // Remove espaços em branco do início e do fim da string
+
+    // let number = 6;
+    // let num_str: String = number.to_string(); // Converte um número para string
+
+    // let empty_string = String::new(); // Cria uma string vazia
+
+    // let s_1: String = String::from("Hello");
+    // let s_2: String = String::from("World");
+    // let s_3: String = format!("{} {}", s_1, s_2); // Concatena duas strings
+    // println!("{}", s_3);
+
+    // println!("Is the string really empty: {}", empty_string.is_empty());
+    // println!("Is the number really a string: {}", number.to_string() == "6");
+
+    /*
+     * Tuplas são coleções de valores de diferentes tipos
+     *  - Acessadas por índice
+     *  - Desestruturadas em variáveis
+     *  - Podem conter diferentes tipos de dados
+     *  - Tem tamanhos variados
+     */
+    let my_info: (&str, f64) = ("Salary", 5_000.0);
+    println!("My {} is {}", my_info.0, my_info.1);
+    println!("Another way of printing the whole tuple is {:?}", my_info);
+
+    let (salary, amount) = my_info;
+    println!("My {} is {}", salary, amount);
+
+    // Indexacao por tuplas aninhadas
+    let nested_tuple: ((&str, f64), &str) = ((salary, amount), "USD");
     println!(
-        "Basics function on Strings, is empty: {}",
-        another_string.is_empty()
-    ); // Verifica se a string está vazia
-    println!(
-        "Basics function on Strings, length: {}",
-        another_string.len()
-    ); // Retorna o tamanho da string
-    println!(
-        "Basics function on Strings, contains 'world': {}",
-        another_string.contains("world")
-    ); // Verifica se a string contém uma substring
-    println!(
-        "Basics function on Strings, bytes: {}",
-        another_string.capacity()
-    ); // Retorna a quantidade de bytes alocados na memória
+        "My {} is {} {}",
+        nested_tuple.0.0, nested_tuple.0.1, nested_tuple.1
+    );
 
-    println!("{}", another_string.trim()); // Remove espaços em branco do início e do fim da string
+    /*
+     * Matriz é uma coleção de elementos de mesmo tipo
+     *  - Deve conter:
+     *    - Um tipo de dado
+     *    - Um tamanho fixo
+     *    - Em []
+     */
 
-    let number = 6;
-    let num_str: String = number.to_string(); // Converte um número para string
+    let mut array: [i32; 2] = [0, 5];
 
-    let empty_string = String::new(); // Cria uma string vazia
+    // Display = como mostrar um valor de forma bonita para o usuário.
+    // Ex: uma String pode ser mostrada direto como texto.
 
-    let s_1: String = String::from("Hello");
-    let s_2: String = String::from("World");
-    let s_3: String = format!("{} {}", s_1, s_2); // Concatena duas strings
-    println!("{}", s_3);
+    // Debug = como mostrar um valor de forma útil para o programador (pra depuração).
+    // Ex: vec![1, 2, 3] vira [1, 2, 3] com {:?}.
 
-    println!("Is the string really empty: {}", empty_string.is_empty());
-    println!("Is the number really a string: {}", number.to_string() == "6");   
+    // Mudamos os valores do array pelo índice
+    array[0] = 10;
+    array[1] = 20;
+
+    println!("Array Value: {}", array[0]);
+    println!("Array: {:?}", array);
+
+    // Inicializando um array com os mesmos valores
+    let another_array: [i32; 2] = [0; 2];
+    println!("Another Array: {:?}", another_array);
+
+    // Imprimindo  um array de char
+    let char_array: [char; 5] = ['a', 'p', 'p', 'l', 'e'];
+    println!("Char Array: {:?}", char_array);
+
+    // Atribuindo uma referencia de um array
+
+    /*
+     * Uma referencia é um ponteiro para um valor em outra parte da memória.
+     * Permite acessar e manipular dados sem fazer cópias.
+     */
+    let numbers: [i32; 4] = [1, 2, 3, 4];
+    // let numbers_ref: &[i32] = &numbers[0..2]; // Criando uma referência do indice 0 ao 1
+    let numbers_ref: &[i32] = &numbers[0..=2]; // Criando uma referência do indice 0 ao 2
+    println!("Numbers Ref: {:?}", numbers_ref);
+
+    /*
+     * Algumas functions de arrays
+    */
+
+    println!("Length: {}", numbers.len()); // Retorna o tamanho do array
+    println!("First Element: {:?}", numbers.first()); // Retorna o primeiro elemento do array na forma de um Option. Options são tipos que podem ou não ter um valor.
+    println!("First Element: {:?}", numbers.first().unwrap()); // Retorna o primeiro elemento do array na forma de um unwrap. Unwrap é uma forma de acessar o valor dentro de um Option, assumindo que ele sempre estará presente.
+    println!("Last Element: {:?}", numbers.last()); // Retorna o último elemento do array na forma de um Option.
+    println!("Last Element: {:?}", numbers.last().unwrap()); // Retorna o último elemento do array na forma de um unwrap.
+    println!("Is Empty: {}", numbers.is_empty()); // Verifica se o array está vazio
+    println!("Size: {}", std::mem::size_of_val(&numbers)); // Retorna o tamanho em bytes do array na memória. É 16 porque contém 4 elementos de 4 bytes cada.
+    // std::mem é um módulo do rust que fornece funções para trabalhar com a memória.
+
+    // Podemos verificar a existência de um elemento em um array
+    let check: Option<&i32> = numbers.get(100);
+    println!("Get Element: {:?}", check); // Retorna o elemento do array na posição 100 na forma de um Option. Como não existe, retorna None.
 }
