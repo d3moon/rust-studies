@@ -172,76 +172,112 @@ fn main() {
      *  - Podem conter diferentes tipos de dados
      *  - Tem tamanhos variados
      */
-    let my_info: (&str, f64) = ("Salary", 5_000.0);
-    println!("My {} is {}", my_info.0, my_info.1);
-    println!("Another way of printing the whole tuple is {:?}", my_info);
+    // let my_info: (&str, f64) = ("Salary", 5_000.0);
+    // println!("My {} is {}", my_info.0, my_info.1);
+    // println!("Another way of printing the whole tuple is {:?}", my_info);
 
-    let (salary, amount) = my_info;
-    println!("My {} is {}", salary, amount);
+    // let (salary, amount) = my_info;
+    // println!("My {} is {}", salary, amount);
 
-    // Indexacao por tuplas aninhadas
-    let nested_tuple: ((&str, f64), &str) = ((salary, amount), "USD");
-    println!(
-        "My {} is {} {}",
-        nested_tuple.0.0, nested_tuple.0.1, nested_tuple.1
-    );
+    // // Indexacao por tuplas aninhadas
+    // let nested_tuple: ((&str, f64), &str) = ((salary, amount), "USD");
+    // println!(
+    //     "My {} is {} {}",
+    //     nested_tuple.0.0, nested_tuple.0.1, nested_tuple.1
+    // );
+
+    // /*
+    //  * Matriz é uma coleção de elementos de mesmo tipo
+    //  *  - Deve conter:
+    //  *    - Um tipo de dado
+    //  *    - Um tamanho fixo
+    //  *    - Em []
+    //  */
+    // let mut array: [i32; 2] = [0, 5];
+
+    // // Display = como mostrar um valor de forma bonita para o usuário.
+    // // Ex: uma String pode ser mostrada direto como texto.
+
+    // // Debug = como mostrar um valor de forma útil para o programador (pra depuração).
+    // // Ex: vec![1, 2, 3] vira [1, 2, 3] com {:?}.
+
+    // // Mudamos os valores do array pelo índice
+    // array[0] = 10;
+    // array[1] = 20;
+
+    // println!("Array Value: {}", array[0]);
+    // println!("Array: {:?}", array);
+
+    // // Inicializando um array com os mesmos valores
+    // let another_array: [i32; 2] = [0; 2];
+    // println!("Another Array: {:?}", another_array);
+
+    // // Imprimindo  um array de char
+    // let char_array: [char; 5] = ['a', 'p', 'p', 'l', 'e'];
+    // println!("Char Array: {:?}", char_array);
+
+    // // Atribuindo uma referencia de um array
+
+    // /*
+    //  * Uma referencia é um ponteiro para um valor em outra parte da memória.
+    //  * Permite acessar e manipular dados sem fazer cópias.
+    //  */
+    // let numbers: [i32; 4] = [1, 2, 3, 4];
+    // // let numbers_ref: &[i32] = &numbers[0..2]; // Criando uma referência do indice 0 ao 1
+    // let numbers_ref: &[i32] = &numbers[0..=2]; // Criando uma referência do indice 0 ao 2
+    // println!("Numbers Ref: {:?}", numbers_ref);
+
+    // /*
+    //  * Algumas functions de arrays
+    // */
+    // println!("Length: {}", numbers.len()); // Retorna o tamanho do array
+    // println!("First Element: {:?}", numbers.first()); // Retorna o primeiro elemento do array na forma de um Option. Options são tipos que podem ou não ter um valor.
+    // println!("First Element: {:?}", numbers.first().unwrap()); // Retorna o primeiro elemento do array na forma de um unwrap. Unwrap é uma forma de acessar o valor dentro de um Option, assumindo que ele sempre estará presente.
+    // println!("Last Element: {:?}", numbers.last()); // Retorna o último elemento do array na forma de um Option.
+    // println!("Last Element: {:?}", numbers.last().unwrap()); // Retorna o último elemento do array na forma de um unwrap.
+    // println!("Is Empty: {}", numbers.is_empty()); // Verifica se o array está vazio
+    // println!("Size: {}", std::mem::size_of_val(&numbers)); // Retorna o tamanho em bytes do array na memória. É 16 porque contém 4 elementos de 4 bytes cada.
+    // // std::mem é um módulo do rust que fornece funções para trabalhar com a memória.
+
+    // // Podemos verificar a existência de um elemento em um array
+    // let check: Option<&i32> = numbers.get(100);
+    // println!("Get Element: {:?}", check); // Retorna o elemento do array na posição 100 na forma de um Option. Como não existe, retorna None.
 
     /*
-     * Matriz é uma coleção de elementos de mesmo tipo
-     *  - Deve conter:
-     *    - Um tipo de dado
-     *    - Um tamanho fixo
-     *    - Em []
+     * Vetores são coleções de elementos de mesmo tipo, mas com tamanho dinâmico.
+     * Declarados com a macro `vec![]`.
+     * A tipagem envolve a utilização de `Vec<T>`, onde `T` é o tipo dos elementos.
      */
+    let mut vetor: Vec<i32> = vec![1, 2, 3, 4];
+    vetor[1] = 10;
+    println!("Vetor: {}", vetor[1]);
 
-    let mut array: [i32; 2] = [0, 5];
+    // Inicializando um vetor com os mesmos valores
+    let vetor_2: Vec<i32> = vec![0; 10];
+    println!("Vetor 2: {:?}", vetor_2);
 
-    // Display = como mostrar um valor de forma bonita para o usuário.
-    // Ex: uma String pode ser mostrada direto como texto.
+    // Criando uma referência do indice 0 ao 1
+    let subset: &[i32] = &vetor[0..2];
+    println!("Subset: {:?}", subset);
 
-    // Debug = como mostrar um valor de forma útil para o programador (pra depuração).
-    // Ex: vec![1, 2, 3] vira [1, 2, 3] com {:?}.
+    // Pesquisando a existencia de um elemento de forma segura usando a referencia em vez de pegar ou copiar
+    let option: Option<&i32> = vetor.get(2);
+    println!("Get Element: {:?}", option);
 
-    // Mudamos os valores do array pelo índice
-    array[0] = 10;
-    array[1] = 20;
+    vetor.push(12); // Adiciona um elemento ao final do vetor
+    println!("Vetor: {:?}", vetor);
 
-    println!("Array Value: {}", array[0]);
-    println!("Array: {:?}", array);
+    vetor.pop(); // Remove o último elemento do vetor
+    println!("Vetor: {:?}", vetor);
 
-    // Inicializando um array com os mesmos valores
-    let another_array: [i32; 2] = [0; 2];
-    println!("Another Array: {:?}", another_array);
+    vetor.remove(1); // Remove o elemento na posição 1
+    println!("Remove Element from Index: {:?}", vetor);
 
-    // Imprimindo  um array de char
-    let char_array: [char; 5] = ['a', 'p', 'p', 'l', 'e'];
-    println!("Char Array: {:?}", char_array);
-
-    // Atribuindo uma referencia de um array
+    println!("Contains Element: {:?}", vetor.contains(&10)); // Preciso passar o & pq é uma medida do Rust para evitar cópias desnecessárias
 
     /*
-     * Uma referencia é um ponteiro para um valor em outra parte da memória.
-     * Permite acessar e manipular dados sem fazer cópias.
+     * Vec guarda os valores dentro dele. Se você passasse o valor direto, o Rust teria que mover o valor para dentro da função, ou copiar.
+     * Ao exigir &T, a função não precisa copiar ou mover nada, só compara a referência com os elementos do vetor.
+     * Isso funciona mesmo para tipos grandes, que não são Copy, sem gastar memória extra.
      */
-    let numbers: [i32; 4] = [1, 2, 3, 4];
-    // let numbers_ref: &[i32] = &numbers[0..2]; // Criando uma referência do indice 0 ao 1
-    let numbers_ref: &[i32] = &numbers[0..=2]; // Criando uma referência do indice 0 ao 2
-    println!("Numbers Ref: {:?}", numbers_ref);
-
-    /*
-     * Algumas functions de arrays
-    */
-
-    println!("Length: {}", numbers.len()); // Retorna o tamanho do array
-    println!("First Element: {:?}", numbers.first()); // Retorna o primeiro elemento do array na forma de um Option. Options são tipos que podem ou não ter um valor.
-    println!("First Element: {:?}", numbers.first().unwrap()); // Retorna o primeiro elemento do array na forma de um unwrap. Unwrap é uma forma de acessar o valor dentro de um Option, assumindo que ele sempre estará presente.
-    println!("Last Element: {:?}", numbers.last()); // Retorna o último elemento do array na forma de um Option.
-    println!("Last Element: {:?}", numbers.last().unwrap()); // Retorna o último elemento do array na forma de um unwrap.
-    println!("Is Empty: {}", numbers.is_empty()); // Verifica se o array está vazio
-    println!("Size: {}", std::mem::size_of_val(&numbers)); // Retorna o tamanho em bytes do array na memória. É 16 porque contém 4 elementos de 4 bytes cada.
-    // std::mem é um módulo do rust que fornece funções para trabalhar com a memória.
-
-    // Podemos verificar a existência de um elemento em um array
-    let check: Option<&i32> = numbers.get(100);
-    println!("Get Element: {:?}", check); // Retorna o elemento do array na posição 100 na forma de um Option. Como não existe, retorna None.
 }
