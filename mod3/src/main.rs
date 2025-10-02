@@ -1,61 +1,43 @@
 /*
- * Regras de referências em Rust
- * Uma referência mutável por vez (Não pode haver mais de uma referência mutável ao mesmo tempo para a mesma variável)
- * Pode  ter muitas referências imutáveis ao mesmo tempo para a mesma variável. Isso permite que várias partes do código leiam o valor ao mesmo tempo, desde que nenhuma delas tente modificá-lo.
- * Mutável e imutável de uma varável não podem coexistir
- * Scope of a reference (escopo de uma referência)
- * Os dados não devem mudar quando referências imutáveis estão em escopo
+ * Desreferência
+    - O operador de desreferência (*) é usado para acessar o valor ao qual um ponteiro está apontando.
+    - Ele "desreferencia" o ponteiro, permitindo que você trabalhe com o valor real.
+    - Isso é útil quando você tem um ponteiro e deseja acessar ou modificar o valor que ele aponta.
+    - A desreferência basicamente é o ato de acessar o valor que está sendo apontado por um ponteiro.
 */
 
+use std::vec;
+
 fn main() {
-    // 1° regra
-    let mut heap_num: Vec<i32> = vec![1, 2, 3, 4, 5];
-    let _ref1 = &mut heap_num;
-    let _ref2 = &mut heap_num; // erro: cannot borrow `heap_num` as mutable more than once at a time
+    let mut x = 5;
+    let y = &mut x; // y é um ponteiro mutável para x
+    *y += 1; // Desreferencia y e incrementa o valor de x
+    println!("O valor de x é: {}", x);
 
-    // 2° regra
-    let mut heap_num2: Vec<i32> = vec![3, 4, 5];
-    let ref1 = &heap_num2; // referência imutável
-    let ref2 = &heap_num2; // outra referência imutável
-    println!("{:?} ,{:?}", ref1, ref2);
+    // Exemplo 1: Tentando modificar um valor através de uma referência imutável
+    let mut v = vec![1, 2, 3];
+    let v1 = &v[0]; // v1 é uma referência imutável
+    // v.push(4); // Erro: não é possível modificar v enquanto v1 está em uso
+    println!("O primeiro elemento é: {}", v1);
 
-    // 3° regra
-    let mut heap_num3: Vec<i32> = vec![6, 7, 8];
-    let ref3: &Vec<i32> = &heap_num3; // referência imutável
-    let ref4: &mut Vec<i32> = &mut heap_num3; // outra referência mutável -> error because it is also borrowed as immutable
+    // Exemplo 2: Modificando um valor através de uma referência mutável
+    let mut v2 = vec![4, 5, 6];
+    let v2_ref = &mut v2[0]; // v2_ref é uma referência mutável
+    *v2_ref += 1; // Desreferencia v2_ref e incrementa o valor
+    println!("O primeiro elemento de v2 é: {}", v2[0]);
 
-    //println!("{:?} ,{:?}", ref3, ref4);
+    // Exemplo 3: Usando clone para copiar valores em vez de referenciar
+    let v3 = vec![7, 8, 9];
+    let v3_clone = v3.clone(); // Cria uma cópia de v3
+    println!("O primeiro elemento de v3_clone é: {}", v3_clone[0]);
 
-    // 4° regra
-    let mut heap_num4: Vec<i32> = vec![9, 10, 11];
-    let ref5: &Vec<i32> = &heap_num4; // referência imutável
-    println!("{:?}", ref5);
+    /* Explicação do Exemplo 3:
+     * O clone cria uma cópia independente do vetor, permitindo que você trabalhe com ambos os vetores sem conflitos.
+     * Aloca uma nova memória para o novo vetor, então as alterações em v3_clone não afetam v3.
+     */
 
-    // Depois que a referência imutável sai de escopo (ela saiu pq ref5 saiu de escopo depois de ser usado), podemos criar uma referência mutável
-    let ref6: &mut Vec<i32> = &mut heap_num4; // referência mutável
-    ref6.push(12);
-    println!("{:?}", ref6);
-
-    // 5° regra
-    let mut heap_num5: Vec<i32> = vec![13, 14, 15];
-    let ref7: &Vec<i32> = &heap_num5; // referência imutável
-
-    /* Tu declarou heap_num5 como mutável → beleza, poderia dar heap_num5.push(99).
-       Só que tu criou ref7 como &Vec<i32> → isso é uma referência imutável.
-       Enquanto existir uma referência imutável,
-       o compilador não deixa você criar uma referência mutável (como o &mut usado por dentro do push),
-       porque poderia dar data race (alguém lendo enquanto alguém escreve).
-    */
-
-    /*
-        O método .push() em um Vec<T> no Rust:
-        Adiciona um novo elemento no final do vetor.
-        Recebe o valor por ownership (ou seja, o valor é movido pro vetor).
-        Se o vetor já tiver atingido a capacidade interna, ele realoca mais memória no heap (dobra ou aumenta a capacidade) e copia os elementos antigos pro novo espaço.
-        Por isso ele precisa de &mut self → está modificando a estrutura interna.
-        */
-    println!("{:?}", ref7);
-
-    heap_num5.push(16); // ok, pq ref7 saiu de escopo
-
+    // Exemplo 4: Tentando modificar um valor através de uma referência imutável (isso causará um erro de compilação)
+    let mut x = 10;
+    let y = &x; // referência imutável (&i32)
+    *y = 20; // ERRO: não pode atribuir via referência imutável
 }
