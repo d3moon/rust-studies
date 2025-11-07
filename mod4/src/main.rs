@@ -1,59 +1,75 @@
-/**
- * Conditional Functionality
- * ========================
- *
-*/
+    /**
+     * Match Statement
+     * ========================
+     * match é como um switch superpoderoso que obrigatoriamente cobre todos os casos (exaustivo)
+     * e sempre executa algo.
+     *
+     * Padrão,Significado
+        1,valor exato
+        2 | 3,OU lógico (2 ou 3)
+        4..=100,intervalo inclusivo (4 até 100)
+        _,qualquer outro valor  (coringa)
 
-fn main() {
-    //    if condition {
-    //    // code to execute if condition is true
-    //    } else {
-    //        // code to execute if condition is false
-    //    }
+    * Propriedades OBRIGATÓRIAS do match
+        * Exaustivo → deve cobrir todos os casos possíveis.
+        * Sempre executa um braço → nunca "cai fora".
+        Erro se faltar _ e não cobrir tudo
+        → Compilador reclama: "non-exhaustive patterns"
 
-    let some_number = 7;
-    if some_number < 5 {
-        println!("The number is less than 5.");
-    } else {
-        println!("The number is 5 or greater.");
+        Erro se braço inalcançável
+        Ex: colocar 2 depois de 2 | 3 → "unreachable pattern"
+
+
+
+    */
+
+    fn main() {
+        let valor = 3;
+
+        // Padrão básico
+        match valor {
+            1 => println!("Um"),
+            2 => println!("Dois"),
+            3 => println!("Três"),
+            _ => println!("Outro valor"), // Curinga para qualquer outro valor
+        }
+
+        // Padrão lógico
+        match valor {
+            1 | 3 | 5 | 7 | 9 => println!("Ímpar"),
+            2 | 4 | 6 | 8 | 10 => println!("Par"),
+            _ => println!("Fora do intervalo"),
+        }
+
+        // Intervalo inclusivo
+        match valor {
+            1..=5 => println!("Entre 1 e 5"),
+            6..=10 => println!("Entre 6 e 10"),
+            _ => println!("Fora do intervalo"),
+        }
+
+        // Atribuindo match a uma variável
+
+        //Regras do let = match:
+            
+        // Última expressão de cada braço = valor retornado
+        // Todos os braços devem retornar o mesmo tipo
+        // Se tiver várias linhas → use {} e sem ; na última
+        // Erro: braços com tipos diferentes
+        let mensagem: &str = match valor {
+            1 => "Um",
+            2 => "Dois",
+            3 => "Três",
+            _ => "Outro valor",
+        };
+        println!("Mensagem: {}", mensagem);
+
+        // Quando PODE omitir _?
+        let is_active = true;
+        match is_active {
+            true => println!("Ativo"),
+            false => println!("Inativo"),
+        };
+        
+
     }
-
-    let flag_1 = true;
-    let flag_2: bool = false;
-
-    if flag_1 || flag_2 {
-        println!("At least one flag is true.");
-    }
-
-    if flag_1 && (flag_2 || some_number > 10) {
-        println!("Complex condition met.");
-    } else if some_number == 7 {
-        println!("The number is exactly 7.");
-    } else {
-        println!("No conditions met.");
-    }
-
-    //println!("Enter a number:");
-
-    // let mut input = String::new();
-    // std::io::stdin()
-    //     .read_line(&mut input)
-    //     .expect("Failed to read line"); // Read user input e retorna um erro se falhar
-
-    // let user_number: i32 = input.trim().parse().expect("Please enter a valid number"); // Converte a entrada para um número inteiro
-
-    // Verifica se o número é par ou ímpar com base no input do usuário
-    // if user_number % 2 == 0 {
-    //     //qualquer número par dividido por 2 tem resto 0
-    //     println!("The number {} is even.", user_number);
-    // } else {
-    //     println!("The number {} is odd.", user_number);
-    // }
-
-    // Condição como expressão na atribuição de variável.
-    let condition: bool = { 4 == 4 };
-
-    println!("{:?}", condition);
-
-    
-}
