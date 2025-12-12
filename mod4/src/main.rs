@@ -1,75 +1,80 @@
-    /**
-     * Match Statement
-     * ========================
-     * match é como um switch superpoderoso que obrigatoriamente cobre todos os casos (exaustivo)
-     * e sempre executa algo.
-     *
-     * Padrão,Significado
-        1,valor exato
-        2 | 3,OU lógico (2 ou 3)
-        4..=100,intervalo inclusivo (4 até 100)
-        _,qualquer outro valor  (coringa)
+use std::io; // ou std::io::stdin()
 
-    * Propriedades OBRIGATÓRIAS do match
-        * Exaustivo → deve cobrir todos os casos possíveis.
-        * Sempre executa um braço → nunca "cai fora".
-        Erro se faltar _ e não cobrir tudo
-        → Compilador reclama: "non-exhaustive patterns"
+/**
+ * Loops em Rust
+ * ========================
+ *
+*/
 
-        Erro se braço inalcançável
-        Ex: colocar 2 depois de 2 | 3 → "unreachable pattern"
+fn main() {
+    // Loop infinito
+    /*
+     * Roda para sempre.
+     * Pare com Ctrl+C ou break.
+     * Raro sozinho → use com break.
+     */
+    // loop {
+    //     println!("Loop infinito");
+    // }
 
+    let my_number = 3;
+    let mut guess = false;
 
+    println!("Adivinhe o número! (1-20)");
 
-    */
+    // Ex 1
+    // Loop while -> Enquanto a condição for falsa, faça isso
+    // while guess != true {
+    //     let mut number = String::new();
+    //     std::io::stdin()
+    //         .read_line(&mut number) // Lê a linha do input
+    //         .expect("Falha ao ler a linha");
 
-    fn main() {
-        let valor = 3;
+    //     let number = number
+    //         .trim()
+    //         .parse::<u32>()
+    //         .expect("Por favor, digite um número!");
 
-        // Padrão básico
-        match valor {
-            1 => println!("Um"),
-            2 => println!("Dois"),
-            3 => println!("Três"),
-            _ => println!("Outro valor"), // Curinga para qualquer outro valor
-        }
+    //     /*
+    //      * Lê input → converte para u8.
+    //      * Se acertar → guess = true → sai do loop.
+    //      * Senão → repete.
+    //      */
+    //     if number == my_number {
+    //         println!("Você adivinhou o número!");
+    //         guess = true;
+    //     } else if number < my_number {
+    //         println!("Muito baixo! Tente novamente.");
+    //     } else {
+    //         println!("Muito alto! Tente novamente.");
+    //     }
+    // }
 
-        // Padrão lógico
-        match valor {
-            1 | 3 | 5 | 7 | 9 => println!("Ímpar"),
-            2 | 4 | 6 | 8 | 10 => println!("Par"),
-            _ => println!("Fora do intervalo"),
-        }
+    // let mut input = String::new();
+    // io::stdin().read_line(&mut input).expect("Erro");
 
-        // Intervalo inclusivo
-        match valor {
-            1..=5 => println!("Entre 1 e 5"),
-            6..=10 => println!("Entre 6 e 10"),
-            _ => println!("Fora do intervalo"),
-        }
+    //let num: u8 = input.trim().parse().expect("Não é número");
 
-        // Atribuindo match a uma variável
-
-        //Regras do let = match:
-            
-        // Última expressão de cada braço = valor retornado
-        // Todos os braços devem retornar o mesmo tipo
-        // Se tiver várias linhas → use {} e sem ; na última
-        // Erro: braços com tipos diferentes
-        let mensagem: &str = match valor {
-            1 => "Um",
-            2 => "Dois",
-            3 => "Três",
-            _ => "Outro valor",
-        };
-        println!("Mensagem: {}", mensagem);
-
-        // Quando PODE omitir _?
-        let is_active = true;
-        match is_active {
-            true => println!("Ativo"),
-            false => println!("Inativo"),
-        };
-        
-
+    // For Loop
+    // 0..5 → exclusivo (0 até 4)
+    // 0..=5 → inclusivo (0 até 5)
+    for i in 0..5 {
+        println!("{}", i) // 0,1,2,3,4
     }
+
+    let vec = [20, 30, 40, 50];
+
+    // Itera até o tamanho do vetor
+    for i in 0..vec.len() {
+        println!("{} e valor {}", i, vec[i]) // 0 e valor 20 ...
+    }
+
+    // Itera sobre um vetor temporário
+    for i in [20, 30, 40, 50] {
+        println!("{}", i);
+    }
+
+    
+
+
+}
